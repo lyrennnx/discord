@@ -83,10 +83,6 @@ export async function bypassLink(url) {
       throw new Error("The bypass request timed out.");
     }
 
-    if (error instanceof SyntaxError) {
-      throw new Error("The API returned invalid JSON.");
-    }
-
     throw error;
   } finally {
     clearTimeout(timeout);
