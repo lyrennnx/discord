@@ -46,7 +46,7 @@ export async function bypassLink(url) {
         "x-api-key": config.bypassApiKey,
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ url: cleanUrl, refresh: false }),  
+      body: JSON.stringify({ url: cleanUrl, refresh: false }),
       signal: controller.signal
     });
 
