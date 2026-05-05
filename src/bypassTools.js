@@ -51,7 +51,17 @@ export async function bypassLink(url) {
     });
 
     const text = await response.text();
-    const payload = text ? JSON.parse(text) : {};
+    const contentType = response.headers.get("content-type") || "unknown content type";
+
+    let payload = {};
+    try {
+      payload = text ? JSON.parse(text) : {};
+    } catch {
+      const preview = text.replace(/\s+/g, " ").slice(0, 160);
+      throw new Error(
+        `API returned non-JSON (${response.status}, ${contentType}). Check BYPASS_TOOLS_API_URL. Preview: ${preview}`
+      );
+    }
 
     if (!response.ok) {
       const message = payload?.message || payload?.error || `API returned ${response.status}`;
