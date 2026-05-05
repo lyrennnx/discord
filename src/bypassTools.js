@@ -43,10 +43,10 @@ export async function bypassLink(url) {
     const response = await fetch(config.bypassApiUrl, {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${config.bypassApiKey}`,
+        "x-api-key": config.bypassApiKey,
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ url: cleanUrl }),
+      body: JSON.stringify({ url: cleanUrl, refresh: false }),  
       signal: controller.signal
     });
 
